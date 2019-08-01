@@ -59,7 +59,7 @@
 		<h4>the nav</h4>
 		<ul class="nav-links">
 			<li><a href="#">home</a></li>
-			<li><a href="#">Study</a></li>
+			<li><a href="welcomepage">Study</a></li>
 			<li><a href="#">quize</a></li>
 			<li><a href="#">score</a></li>
 		</ul>

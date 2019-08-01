@@ -5,34 +5,30 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.CORBA.Request;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.flashcardapp.entities.FlashCards;
 import com.flashcardapp.entities.Flashcarduser;
 import com.flashcardapp.service.CardServices;
 import com.flashcardapp.service.UserServices;
 
 
 @Controller
-//@SessionAttributes(value = {"sFlashcarduser", "sFlashCards"})
+@SessionAttributes(value = {"sFlashcarduser", "sFlashCards"})
 public class FlashCardAppController 
 {
 	
-//	@ModelAttribute("sFlashcarduser") @ModelAttribute("sFlashcarduser") Flashcarduser fcuser
-//	public Flashcarduser setUpFlashCarduser() {
-//		Flashcarduser fcuser = new Flashcarduser("abcde@gmail", "Karma Tsering", "123456");
-//		return fcuser;		
-//	}
+	@ModelAttribute("sFlashcarduser") //@ModelAttribute("sFlashcarduser") Flashcarduser fcuser
+	public Flashcarduser setUpFlashCarduser() {
+		Flashcarduser fcuser = new Flashcarduser();
+		return fcuser;		
+	}
 	
 	@RequestMapping("/toLoginPage")
 	public ModelAndView toLoginPage() 
@@ -40,10 +36,17 @@ public class FlashCardAppController
 		return new ModelAndView("login");
 	}
 	
+	@RequestMapping("/welcomepage")
+	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) 
+	{
+		return new ModelAndView("welcomepage");
+	}
+	
+	
 	@RequestMapping("/Login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		
+		System.out.println("herreeeee");
 		String uname = request.getParameter("uname");
 		String upasswd = request.getParameter("upasswd");
 		
@@ -51,6 +54,7 @@ public class FlashCardAppController
 		
 		UserServices uService = new UserServices();
 		Flashcarduser user = uService.validateUser(uname, upasswd);
+		mv.addObject("sFlashcarduser", user);
 
 		if(user != null)
 		{
