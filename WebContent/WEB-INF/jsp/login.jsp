@@ -17,6 +17,8 @@
 <c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/style-login.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/style-landingpage.css"/>">
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=3.0.1"></script>
@@ -32,6 +34,20 @@
 </head>
 
 <body>
+	<!-- Navigation -->
+	<nav class="logo">
+		<h4>the nav</h4>
+		<ul class="nav-links">
+			<li><a href="HomePage">Home</a></li>
+			<li><a href="#">quize</a></li>
+			<li><a href="#">score</a></li>
+		</ul>
+		<div class="burger">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+		</div>
+	</nav>
 	<div class="hero">
 		<div class="hero-overlay">
 			<div class="login-page" Style="padding: 8% 0 0;">
@@ -45,11 +61,11 @@
 							Already registered? <a href="#">Sign In</a>
 						</p>
 					</form>
-					<form action="Login" method="post" class="login-form">
+					<form action="Login" method="POST" class="login-form">
 						<input type="text" name="uname" placeholder="username" /> <input
 							type="password" name="upasswd" placeholder="password" />
 						<button>login</button>
-						<p style="display: block; color: green;">${message}</p>
+						<p style="display: none; display: ${RightCred}; color: green;">You are registred, please try logging in</p>
 						<p style="display: none; display: ${WrongCred}; color: red;">Wrong
 							credential, please try registering</p>
 						<p class="message">

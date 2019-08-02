@@ -41,7 +41,8 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="toLoginPage.html">Login</a></li>
+			<li><a href="HomePage">Home</a></li>
+			<li><a href="LoginPage">Login</a></li>
 			<li><a href="#">Study</a></li>
 			<li><a href="#">quize</a></li>
 			<li><a href="#">score</a></li>

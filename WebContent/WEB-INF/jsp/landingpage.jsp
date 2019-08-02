@@ -50,16 +50,16 @@
 <link href="<c:url value="/resources/css/style-landingpage.css" />"
 	rel="stylesheet">
 <c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
+
 </head>
 
-<body>
 
+<body>
 	<!-- Navigation -->
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="#">home</a></li>
-			<li><a href="welcomepage">Study</a></li>
+			<li><a href="HomePage">Home</a></li>
 			<li><a href="#">quize</a></li>
 			<li><a href="#">score</a></li>
 		</ul>
@@ -84,11 +84,10 @@
 			<div class="carousel-inner" role="listbox"
 				style="background: url(${bgbanner03JPG}) no-repeat fixed; background-size: cover;">
 				<%
-					CardServices cService = new CardServices();
-					List<FlashCards> flashcardlist = cService.getAllFlashCard();
-
+					Flashcarduser fc_user = (Flashcarduser) session.getAttribute("sFlashcarduser");
+					List<FlashCards> fcs = (List<FlashCards>) session.getAttribute("sFlashCards");
 					int i = 0;
-					for (FlashCards fc : flashcardlist.subList(0, 10)) {
+					for (FlashCards fc : fcs.subList(0, 10)) {
 						String active = "";
 						if (i < 1) {
 							active = "active";
@@ -125,7 +124,7 @@
 			</a>
 		</div>
 	</header>
-	<h1>Welcome ${fullname}</h1>
+	<h1>Welcome <%=fc_user.getCname()%></h1>
 	<div class="container">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -153,7 +152,7 @@
 				</thead>
 				<tbody>
 					<%
-						for (FlashCards fc : flashcardlist) {
+						for (FlashCards fc : fcs) {
 					%>
 					<tr>
 						<td><%=fc.getFront()%></td>
