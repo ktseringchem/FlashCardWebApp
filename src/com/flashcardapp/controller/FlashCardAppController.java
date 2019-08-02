@@ -42,6 +42,7 @@ public class FlashCardAppController {
 
 	@RequestMapping("/HomePage")
 	public ModelAndView getHomePage() {
+		System.out.println();
 		return new ModelAndView("index");
 	}
 	
