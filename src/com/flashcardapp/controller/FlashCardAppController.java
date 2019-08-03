@@ -6,9 +6,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,20 +47,20 @@ public class FlashCardAppController {
 	// This Handler will direct you to index.jsp
 	@RequestMapping("/LandingPage")
 	public ModelAndView getLandingPage() {
-		System.out.println();
 		return new ModelAndView("index");
 	}
 
 	// This Handler will direct you to login.jsp
 	@RequestMapping("/LoginPage")
 	public ModelAndView getLoginPage() {
-		return new ModelAndView("login");
+		ModelAndView mv = new ModelAndView("login");
+		mv.addObject("userKey", new Flashcarduser());
+		return mv;
 	}
-	
+
 	// This Handler will direct you to welcomepage.jsp
 	@RequestMapping("/WelcomePage")
-	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) 
-	{
+	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) {
 		ModelAndView mv = new ModelAndView();
 
 		CardServices cService = new CardServices();
@@ -70,7 +74,6 @@ public class FlashCardAppController {
 	// This Handler will direct you to study.jsp
 	@RequestMapping("/StudyPage")
 	public ModelAndView getStudyPage() {
-		System.out.println();
 		return new ModelAndView("study");
 	}
 
@@ -106,19 +109,25 @@ public class FlashCardAppController {
 //	}
 
 	@RequestMapping("/Register")
-	public ModelAndView registerFlashCardUser(@RequestParam("emailAddress") String emailAddress,
-			@RequestParam("fullName") String fullName, @RequestParam("password") String password) {
+	public ModelAndView registerFlashCardUser(
+			@Valid @ModelAttribute("userKey") Flashcarduser flashcarduser,
+			BindingResult errors) 
+	{
 		ModelAndView mv = new ModelAndView();
-		UserServices uService = new UserServices();
 
-		if (emailAddress.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
-			mv.addObject("inCorrectReg", "block");
-		} else {
-			uService.registerCardUser(emailAddress, fullName, password);
-			mv.addObject("RightCred", "block");
+		if (errors.hasErrors()) 
+		{
+//			mv.addObject("inCorrectReg", "block");
+			mv.setViewName("login");
+			return mv;
+		} 
+		else 
+		{
+			UserServices uService = new UserServices();
+			uService.registerCardUser(flashcarduser.getEmail(), flashcarduser.getCname(), flashcarduser.getPassword());
+			mv.setViewName("WelcomePage");
+			return mv;
 		}
-		mv.setViewName("login");
-		return mv;
 	}
 
 	@RequestMapping("/createcard")
@@ -155,6 +164,12 @@ public class FlashCardAppController {
 		CardServices cardServices = new CardServices();
 		cardServices.updateFlashCard(front, back, id);
 
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder)
+	{
+		binder.setDisallowedFields(new String[] {"cName"});
 	}
 
 }

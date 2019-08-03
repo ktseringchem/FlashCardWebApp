@@ -1,15 +1,15 @@
 package com.flashcardapp.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import com.flashcardapp.validator.EmailConstraint;
 
 @Entity
 @Table
@@ -18,7 +18,12 @@ public class Flashcarduser {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int user_id;
+	
+	@Column
+	@EmailConstraint
 	private String email;
+	
+	@Size(min = 2, max = 20, message = "First name length must be between {2} and {1}")
 	private String cname;
 	private String password;
 	
