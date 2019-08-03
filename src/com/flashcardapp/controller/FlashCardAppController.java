@@ -33,53 +33,29 @@ public class FlashCardAppController {
 		Flashcarduser fcuser = new Flashcarduser();
 		return fcuser;
 	}
-	
+
 	@ModelAttribute("sFlashCards")
 	public FlashCards setUpFlashCards() {
 		FlashCards fcs = new FlashCards();
 		return fcs;
 	}
 
-	@RequestMapping("/HomePage")
-	public ModelAndView getHomePage() {
+	// This Handler will direct you to index.jsp
+	@RequestMapping("/LandingPage")
+	public ModelAndView getLandingPage() {
 		System.out.println();
 		return new ModelAndView("index");
 	}
-	
+
+	// This Handler will direct you to login.jsp
 	@RequestMapping("/LoginPage")
 	public ModelAndView getLoginPage() {
 		return new ModelAndView("login");
 	}
-
-	@RequestMapping("/welcomepage")
-	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) {
-		return new ModelAndView("welcomepage");
-	}
-
-	@RequestMapping(value = "/Login", method = { RequestMethod.POST })
-	public ModelAndView doPost(Model model, @RequestParam("uname") String uname, @RequestParam("upasswd") String upasswd) 
-	{
-		ModelAndView mv = new ModelAndView();
-		
-		UserServices uService = new UserServices();
-		Flashcarduser user = uService.validateUser(uname, upasswd);
-
-		if (user != null) 
-		{
-			mv.setViewName("redirect:/getWelcompage");
-			mv.addObject("sFlashcarduser", user);
-			return mv;
-		} 
-		else 
-		{
-			mv.addObject("WrongCred", "block");
-			mv.setViewName("login");
-			return mv;
-		}
-	}
-
-	@RequestMapping("/getWelcompage")
-	public ModelAndView getWelcompage() 
+	
+	// This Handler will direct you to welcomepage.jsp
+	@RequestMapping("/WelcomePage")
+	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) 
 	{
 		ModelAndView mv = new ModelAndView();
 
@@ -87,32 +63,64 @@ public class FlashCardAppController {
 		List<FlashCards> flashcardlist = cService.getAllFlashCard();
 		mv.addObject("sFlashCards", flashcardlist);
 
-
 		mv.setViewName("welcomepage");
 		return mv;
 	}
 
+	// This Handler will direct you to study.jsp
+	@RequestMapping("/StudyPage")
+	public ModelAndView getStudyPage() {
+		System.out.println();
+		return new ModelAndView("study");
+	}
+
+	@RequestMapping(value = "/Login", method = { RequestMethod.POST })
+	public ModelAndView doPost(Model model, @RequestParam("uname") String uname,
+			@RequestParam("upasswd") String upasswd) {
+		ModelAndView mv = new ModelAndView();
+
+		UserServices uService = new UserServices();
+		Flashcarduser user = uService.validateUser(uname, upasswd);
+
+		if (user != null) {
+			mv.setViewName("redirect:/WelcomePage");
+			mv.addObject("sFlashcarduser", user);
+			return mv;
+		} else {
+			mv.addObject("WrongCred", "block");
+			mv.setViewName("login");
+			return mv;
+		}
+	}
+
+//	@RequestMapping("/getWelcompage")
+//	public ModelAndView getWelcompage() {
+//		ModelAndView mv = new ModelAndView();
+//
+//		CardServices cService = new CardServices();
+//		List<FlashCards> flashcardlist = cService.getAllFlashCard();
+//		mv.addObject("sFlashCards", flashcardlist);
+//
+//		mv.setViewName("welcomepage");
+//		return mv;
+//	}
+
 	@RequestMapping("/Register")
 	public ModelAndView registerFlashCardUser(@RequestParam("emailAddress") String emailAddress,
-			@RequestParam("fullName") String fullName,
-			@RequestParam("password") String password)
-	{
+			@RequestParam("fullName") String fullName, @RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
 		UserServices uService = new UserServices();
 
-		if (emailAddress.isEmpty() || fullName.isEmpty() || password.isEmpty()) 
-		{
+		if (emailAddress.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
 			mv.addObject("inCorrectReg", "block");
-		} 
-		else 
-		{
+		} else {
 			uService.registerCardUser(emailAddress, fullName, password);
 			mv.addObject("RightCred", "block");
 		}
 		mv.setViewName("login");
 		return mv;
 	}
-			
+
 	@RequestMapping("/createcard")
 	public @ResponseBody ModelAndView createFlashCard(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

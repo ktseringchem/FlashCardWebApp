@@ -18,7 +18,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/style-login.css"/>">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/style-landingpage.css"/>">
+	href="<c:url value="/resources/css/style-study.css"/>">
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=3.0.1"></script>
@@ -38,9 +38,11 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="HomePage">Home</a></li>
+			<li><a href="LandingPage">Landing</a></li>
+			<li><a href="LoginPage">Login</a></li>
+			<li><a href="WelcomePage">Home</a></li>
+			<li><a href="StudyPage">Study</a></li>
 			<li><a href="#">quize</a></li>
-			<li><a href="#">score</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>

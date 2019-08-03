@@ -1,6 +1,5 @@
 @charset "ISO-8859-1";
 
-
 .hero-overlay {
 	background-color: RGBA(0, 0, 0, 0.47);
 	min-height: 100vh;
@@ -68,17 +67,6 @@
 
 .form .register-form {
 	display: none;
-}
-
-/* body {
-	background: #76b852; fallback for old browsers
-	background: -webkit-linear-gradient(right, #76b852, #8dc26f);
-	background: -moz-linear-gradient(right, #76b852, #8dc26f);
-	background: -o-linear-gradient(right, #76b852, #8dc26f);
-	background: linear-gradient(to left, #76b852, #8dc26f);
-	font-family: "Roboto", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale; */
 }
 
 .rotating-item {
