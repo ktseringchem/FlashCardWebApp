@@ -96,18 +96,6 @@ public class FlashCardAppController {
 		}
 	}
 
-//	@RequestMapping("/getWelcompage")
-//	public ModelAndView getWelcompage() {
-//		ModelAndView mv = new ModelAndView();
-//
-//		CardServices cService = new CardServices();
-//		List<FlashCards> flashcardlist = cService.getAllFlashCard();
-//		mv.addObject("sFlashCards", flashcardlist);
-//
-//		mv.setViewName("welcomepage");
-//		return mv;
-//	}
-
 	@RequestMapping("/Register")
 	public ModelAndView registerFlashCardUser(
 			@Valid @ModelAttribute("userKey") Flashcarduser flashcarduser,
@@ -125,7 +113,7 @@ public class FlashCardAppController {
 		{
 			UserServices uService = new UserServices();
 			uService.registerCardUser(flashcarduser.getEmail(), flashcarduser.getCname(), flashcarduser.getPassword());
-			mv.setViewName("WelcomePage");
+			mv.setViewName("welcomepage");
 			return mv;
 		}
 	}

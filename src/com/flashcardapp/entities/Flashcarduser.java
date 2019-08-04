@@ -20,7 +20,7 @@ public class Flashcarduser {
 	private int user_id;
 	
 	@Column
-	@EmailConstraint
+//	@EmailConstraint
 	private String email;
 	
 	@Size(min = 2, max = 20, message = "First name length must be between {2} and {1}")
@@ -67,4 +67,32 @@ public class Flashcarduser {
 	public String toString() {
 		return "Users [email=" + email + ", cname=" + cname + ", password=" + password + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Flashcarduser) 
+		{
+			Flashcarduser other = (Flashcarduser) obj;
+			
+			boolean sameuser_id =(this.user_id == other.getUser_id());
+			boolean sameemail =(this.email.equals(other.getEmail()));
+			boolean samecname =(this.email.equals(other.getCname()));
+			boolean samepassword =(this.password.equals(other.getPassword()));
+			if(sameuser_id && sameemail && samecname && samepassword) return true;
+			else return false;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+
+	
+	
+	
+	
+	
 }
