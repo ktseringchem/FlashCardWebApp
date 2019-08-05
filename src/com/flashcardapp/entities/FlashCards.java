@@ -34,7 +34,7 @@ public class FlashCards {
 	private Timestamp timestamp;
 	@JoinColumn(name="User_id")
 	@ManyToOne
-	private Flashcarduser Flashcarduser;
+	private Flashcarduser flashcarduser;
 	
 	
 	public FlashCards() {
@@ -48,20 +48,18 @@ public class FlashCards {
 		this.back = back;
 	}
 
-	public FlashCards(String front, String back, com.flashcardapp.entities.Flashcarduser flashcarduser) {
+	public FlashCards(String front, String back,  int User_id) {
 		super();
 		this.front = front;
 		this.back = back;
-		Flashcarduser = flashcarduser;
+		User_id = flashcarduser.getUser_id();
 	}
-	public FlashCards(int flashcard_id, String front, String back, Timestamp timestamp,
-			com.flashcardapp.entities.Flashcarduser flashcarduser) {
+	public FlashCards(int flashcard_id, String front, String back, Flashcarduser flashcarduser) {
 		super();
 		this.flashcard_id = flashcard_id;
 		this.front = front;
 		this.back = back;
-		this.timestamp = timestamp;
-		Flashcarduser = flashcarduser;
+		this.flashcarduser = flashcarduser;
 	}
 	public int getFlashcard_id() {
 		return flashcard_id;
@@ -88,15 +86,15 @@ public class FlashCards {
 		this.timestamp = timestamp;
 	}
 	public Flashcarduser getFlashcarduser() {
-		return Flashcarduser;
+		return flashcarduser;
 	}
 	public void setFlashcarduser(Flashcarduser flashcarduser) {
-		Flashcarduser = flashcarduser;
+		this.flashcarduser = flashcarduser;
 	}
 	@Override
 	public String toString() {
 		return "FlashCards [flashcard_id=" + flashcard_id + ", front=" + front + ", back=" + back + ", timestamp="
-				+ timestamp + ", Flashcarduser=" + Flashcarduser + "]";
+				+ timestamp + ", Flashcarduser=" + flashcarduser + "]";
 	}
 		
 }

@@ -1,5 +1,7 @@
 package com.flashcardapp.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -71,6 +73,29 @@ public class UserServices implements UserDaoI {
 			entityManagerFactory.close();
 		}
 		
+	}
+	
+	public List<Flashcarduser> getAllCardUser()
+	{
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try
+		{
+			Query query = entityManager.createNamedQuery("getAllCardUser");
+			List<Flashcarduser> fc_list = query.getResultList();
+			return fc_list;
+			
+		}
+		catch (Exception e) 
+		{
+			e.getMessage();
+		}
+		finally
+		{
+			entityManager.close();
+			entityManagerFactory.close();
+		}
+		return null;
 	}
 	
 

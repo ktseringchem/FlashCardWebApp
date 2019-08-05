@@ -1,16 +1,24 @@
 package com.flashcardapp.controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
+
+import com.flashcardapp.entities.FlashCards;
+import com.flashcardapp.entities.Flashcarduser;
+import com.flashcardapp.service.CardServices;
+import com.flashcardapp.service.UserServices;
 
 public class MainRunner {
 
 	public static void main(String[] args) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.close();
-		entityManagerFactory.close();
+//		CardServices cser = new CardServices();
+//		List<FlashCards> fc_list = (List<FlashCards>) cser.getAllFlashCard();
+		UserServices uSer = new UserServices();
+		List<Flashcarduser> fcU = uSer.getAllCardUser();
+		for(Flashcarduser user: fcU) 
+		{
+		System.out.println("{new Flashcarduser(\"" + user.getEmail() + "\", \""+ user.getCname() + "\", \"" + user.getPassword() +  "\")},");
+		}
+		
 
 	}
 
