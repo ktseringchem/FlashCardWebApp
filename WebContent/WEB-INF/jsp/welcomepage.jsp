@@ -1,8 +1,6 @@
 <%@page import="com.flashcardapp.entities.Flashcarduser"%>
-<%@page import="com.flashcardapp.entities.FlashCards"%>
-<%@page import="java.util.List"%>
-<%@page import="com.flashcardapp.service.CardServices"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
@@ -21,10 +19,12 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-<link rel="stylesheet" href="<c:url value="/resources/css/style-welcomepage.css" />">
+<link rel="stylesheet"
+	href="<c:url value= "/resources/css/style-welcomepage.css" />">
 <script type="text/javascript"
-	src="<c:url value="/resources/script/js-welcomepage.js"/>" ></script>
-	
+	src="<c:url value="/resources/script/js-welcomepage.js"/>"></script>
+<c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
+
 <style type="text/css">
 .hero {
 	background: url(${bgbanner03JPG}) no-repeat fixed;
@@ -41,22 +41,24 @@
 		Flashcarduser fc_user = (Flashcarduser) session.getAttribute("sFlashcarduser");
 	%>
 
-	<!-- Navigation -->
-	<nav class="logo">
-		<h4>the nav</h4>
-		<ul class="nav-links">
-			<li><a href="HomePage">Home</a></li>
-			<li><a href="#">quize</a></li>
-			<li><a href="#">score</a></li>
-		</ul>
-		<div class="burger">
-			<div class="line1"></div>
-			<div class="line2"></div>
-			<div class="line3"></div>
-		</div>
-	</nav>
 	<div class="hero">
 		<div class="hero-overlay">
+			<!-- Navigation -->
+			<nav class="logo">
+				<h4>the nav</h4>
+				<ul class="nav-links">
+					<li><a href="LandingPage">Landing</a></li>
+					<li><a href="LoginPage">Login</a></li>
+					<li><a href="WelcomePage">Home</a></li>
+					<li><a href="StudyPage">Study</a></li>
+					<li><a href="#">quize</a></li>
+				</ul>
+				<div class="burger">
+					<div class="line1"></div>
+					<div class="line2"></div>
+					<div class="line3"></div>
+				</div>
+			</nav>
 			<h1>
 				Welcome
 				<%=fc_user.getCname()%></h1>

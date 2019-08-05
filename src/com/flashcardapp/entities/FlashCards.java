@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -99,10 +98,5 @@ public class FlashCards {
 		return "FlashCards [flashcard_id=" + flashcard_id + ", front=" + front + ", back=" + back + ", timestamp="
 				+ timestamp + ", Flashcarduser=" + Flashcarduser + "]";
 	}
-	
-//	Date date= new Date();
-//	long time = date.getTime();
-//	Timestamp timestamp = new Timestamp(time);
-
 		
 }

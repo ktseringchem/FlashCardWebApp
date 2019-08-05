@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/style-login.css"/>">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/style-landingpage.css"/>">
+	href="<c:url value="/resources/css/style-study.css"/>">
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=3.0.1"></script>
@@ -38,9 +38,11 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="HomePage">Home</a></li>
+			<li><a href="LandingPage">Landing</a></li>
+			<li><a href="LoginPage">Login</a></li>
+			<li><a href="WelcomePage">Home</a></li>
+			<li><a href="StudyPage">Study</a></li>
 			<li><a href="#">quize</a></li>
-			<li><a href="#">score</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>
@@ -52,15 +54,20 @@
 		<div class="hero-overlay">
 			<div class="login-page" Style="padding: 8% 0 0;">
 				<div class="form">
-					<form action="Register" class="register-form">
-						<input type="text" name="fullName" placeholder="name" /> <input
-							type="password" name="password" placeholder="password" /> <input
-							type="text" name="emailAddress" placeholder="email address" />
-						<button>create</button>
+					<form:form method="POST" action="Register" class="register-form" modelAttribute="userKey">
+						
+						<form:input type="text" path="cname" placeholder="Enter Full Name" id="cname" />
+						 <form:errors path="cname" />
+						 
+						<input type="password" name="password" placeholder="password" />
+						
+						<form:input type="text" path="email" placeholder="Enter email address" id="email"/>
+						<form:errors path="email" />
+						<input type="submit" value="create" />
 						<p class="message">
 							Already registered? <a href="#">Sign In</a>
 						</p>
-					</form>
+					</form:form>
 					<form action="Login" method="POST" class="login-form">
 						<input type="text" name="uname" placeholder="username" /> <input
 							type="password" name="upasswd" placeholder="password" />

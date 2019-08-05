@@ -33,12 +33,12 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- <script
@@ -46,8 +46,8 @@
 
 <!-- Custom styles -->
 <script type="text/javascript"
-	src="<c:url value="/resources/script/js-landingpage.js" />"></script>
-<link href="<c:url value="/resources/css/style-landingpage.css" />"
+	src="<c:url value="/resources/script/js-study.js" />"></script>
+<link href="<c:url value="/resources/css/style-study.css" />"
 	rel="stylesheet">
 <c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
 
@@ -59,9 +59,11 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="HomePage">Home</a></li>
+			<li><a href="LandingPage">Landing</a></li>
+			<li><a href="LoginPage">Login</a></li>
+			<li><a href="WelcomePage">Home</a></li>
+			<li><a href="StudyPage">Study</a></li>
 			<li><a href="#">quize</a></li>
-			<li><a href="#">score</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>
@@ -124,7 +126,9 @@
 			</a>
 		</div>
 	</header>
-	<h1>Welcome <%=fc_user.getCname()%></h1>
+	<h1>
+		Welcome
+		<%=fc_user.getCname()%></h1>
 	<div class="container">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -158,18 +162,14 @@
 						<td><%=fc.getFront()%></td>
 						<td><%=fc.getBack()%></td>
 						<td><%=fc.getFlashcard_id()%></td>
-						<td>
-							<a class="add" title="Add" data-toggle="tooltip"> 
-								<i class="material-icons">&#xE03B;</i>
-							</a> 
-							<a class="edit" title="Edit" data-toggle="tooltip"> 
-								<i class="material-icons">&#xE254;</i>
-							</a> 
-							<a class="delete" title="Delete" data-toggle="tooltip"> 
-								<i  onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>" class="material-icons">&#xE872;</i>
-							<%-- onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>" --%>
-							</a>
-						</td>
+						<td><a class="add" title="Add" data-toggle="tooltip"> <i
+								class="material-icons">&#xE03B;</i>
+						</a> <a class="edit" title="Edit" data-toggle="tooltip"> <i
+								class="material-icons">&#xE254;</i>
+						</a> <a class="delete" title="Delete" data-toggle="tooltip"> <i
+								onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>"
+								class="material-icons">&#xE872;</i> <%-- onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>" --%>
+						</a></td>
 					</tr>
 					<%
 						}
@@ -197,6 +197,3 @@
 </body>
 
 </html>
-
-
-
