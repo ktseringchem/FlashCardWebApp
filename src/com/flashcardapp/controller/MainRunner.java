@@ -10,15 +10,14 @@ import com.flashcardapp.service.UserServices;
 public class MainRunner {
 
 	public static void main(String[] args) {
-//		CardServices cser = new CardServices();
-//		List<FlashCards> fc_list = (List<FlashCards>) cser.getAllFlashCard();
+		CardServices cser = new CardServices();
+		List<FlashCards> fc_list = (List<FlashCards>) cser.getAllFlashCard();
 		UserServices uSer = new UserServices();
 		List<Flashcarduser> fcU = uSer.getAllCardUser();
-		for(Flashcarduser user: fcU) 
-		{
-		System.out.println("{new Flashcarduser(\"" + user.getEmail() + "\", \""+ user.getCname() + "\", \"" + user.getPassword() +  "\")},");
+		for (FlashCards fc : fc_list.subList(0, 11)) {
+			System.out.println(fc);
+//		System.out.println("{new Flashcarduser("+user.getUser_id()+ ", \"" + user.getEmail() + "\", \""+ user.getCname() + "\", \"" + user.getPassword() +  "\")},");
 		}
-		
 
 	}
 

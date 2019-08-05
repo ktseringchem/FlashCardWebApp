@@ -96,5 +96,40 @@ public class FlashCards {
 		return "FlashCards [flashcard_id=" + flashcard_id + ", front=" + front + ", back=" + back + ", timestamp="
 				+ timestamp + ", Flashcarduser=" + flashcarduser + "]";
 	}
-		
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((back == null) ? 0 : back.hashCode());
+		result = prime * result + flashcard_id;
+		result = prime * result + ((front == null) ? 0 : front.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FlashCards other = (FlashCards) obj;
+		if (back == null) {
+			if (other.back != null)
+				return false;
+		} else if (!back.equals(other.back))
+			return false;
+		if (flashcard_id != other.flashcard_id)
+			return false;
+		if (front == null) {
+			if (other.front != null)
+				return false;
+		} else if (!front.equals(other.front))
+			return false;
+		return true;
+	}
+
+	
 }
