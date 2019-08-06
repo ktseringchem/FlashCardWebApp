@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +38,7 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
+			<li><a href="LandingPage">Landing</a></li>
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
@@ -54,14 +55,17 @@
 		<div class="hero-overlay">
 			<div class="login-page" Style="padding: 8% 0 0;">
 				<div class="form">
-					<form:form method="POST" action="Register" class="register-form" modelAttribute="userKey">
-						
-						<form:input type="text" path="cname" placeholder="Enter Full Name" id="cname" />
-						 <form:errors path="cname" />
-						 
+					<form:form method="POST" action="Register" class="register-form"
+						modelAttribute="userKey">
+
+						<form:input type="text" path="cname" placeholder="Enter Full Name"
+							id="cname" />
+						<form:errors path="cname" />
+
 						<input type="password" name="password" placeholder="password" />
-						
-						<form:input type="text" path="email" placeholder="Enter email address" id="email"/>
+
+						<form:input type="text" path="email"
+							placeholder="Enter email address" id="email" />
 						<form:errors path="email" />
 						<input type="submit" value="create" />
 						<p class="message">
@@ -72,7 +76,8 @@
 						<input type="text" name="uname" placeholder="username" /> <input
 							type="password" name="upasswd" placeholder="password" />
 						<button>login</button>
-						<p style="display: none; display: ${RightCred}; color: green;">You are registred, please try logging in</p>
+						<p style="display: none; display: ${RightCred}; color: green;">You
+							are registred, please try logging in</p>
 						<p style="display: none; display: ${WrongCred}; color: red;">Wrong
 							credential, please try registering</p>
 						<p class="message">

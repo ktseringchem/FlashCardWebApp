@@ -70,6 +70,8 @@ public class FlashCardAppController {
 	@RequestMapping("/WelcomePage")
 	public ModelAndView getWelcomepage(HttpSession session) {
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
+		
+		System.out.println(flashcarduser);
 		ModelAndView mv = new ModelAndView();
 		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
 			mv.setViewName("welcomepage");
@@ -99,14 +101,19 @@ public class FlashCardAppController {
 
 	// This Handler will direct you to quiz.jsp
 	@RequestMapping("/QuizPage")
-	public ModelAndView getQuizPage(HttpSession session) {
+	public ModelAndView getQuizPage(HttpSession session) 
+	{
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
 		ModelAndView mv = new ModelAndView();
 
-		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+		if (flashcarduser != null && session.getAttribute("uname") != null 
+				&& session.getAttribute("upasswd") != null) 
+		{
 			mv.setViewName("quiz");
 			return mv;
-		} else {
+		} 
+		else 
+		{
 			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
