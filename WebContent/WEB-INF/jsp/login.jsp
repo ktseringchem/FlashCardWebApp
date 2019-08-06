@@ -38,11 +38,11 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="LandingPage">Landing</a></li>
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="#">quize</a></li>
+			<li><a href="QuizPage">Quiz</a></li>
+			<li><a href="Logout">Logout</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>

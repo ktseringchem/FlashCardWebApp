@@ -105,7 +105,7 @@ public class CardServices {
 		try
 		{
 			FlashCards fc = entityManager.find(FlashCards.class, fc_id);
-			System.out.println(fc.getFlashcard_id());
+			
 			entityManager.getTransaction().begin();
 			fc.setFront(front);
 			fc.setBack(back);
@@ -113,7 +113,7 @@ public class CardServices {
 		}
 		catch (Exception e) 
 		{
-			
+			e.getMessage();
 		}
 		finally
 		{
