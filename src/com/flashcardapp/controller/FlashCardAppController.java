@@ -141,7 +141,7 @@ public class FlashCardAppController {
 			return mv;
 		} else {
 			mv.addObject("WrongCred", "block");
-			mv.setViewName("login");
+			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
 	}

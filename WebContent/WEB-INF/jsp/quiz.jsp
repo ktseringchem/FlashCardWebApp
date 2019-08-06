@@ -21,45 +21,25 @@
 
 <title>landing page</title>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-
 <title>Welcome page</title>
 
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<!-- Bootstrap CSS -->
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<!-- Custom styles -->
 <script type="text/javascript"
 	src="<c:url value="/resources/script/js-study.js" />"></script>
 <link href="<c:url value="/resources/css/style-study.css" />"
 	rel="stylesheet">
 
-<c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
-
 </head>
 
 
 <body>
-	<%
-		CardServices cService = new CardServices();
-		List<FlashCards> flashcardlist = cService.getAllFlashCard();
-	%>
 
 	<!-- Navigation -->
 	<nav class="logo">
@@ -68,7 +48,7 @@
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="QuizPage">quiz</a></li>
+			<li><a href="QuizPage">quize</a></li>
 			<li><a href="Logout">Logout</a></li>
 		</ul>
 		<div class="burger">
@@ -77,72 +57,55 @@
 			<div class="line3"></div>
 		</div>
 	</nav>
-
-	<div id="carouselExampleIndicators" class="carousel slide"
-		data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0"
-				class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<%
-				int i = 0;
-				for (FlashCards fc : flashcardlist.subList(0, 10)) {
-					String active = "";
-					if (i < 1) {
-						active = "active";
-					}
-			%>
-			<div class="carousel-item active">
-				<div class="carousel-item <%=active%>">
-					<div class="carousel-caption d-none d-md-block">
-						<div class="flip-card">
-							<div class="flip-card-inner">
-								<div class="flip-card-front">
-									<p class="card-text"><%=fc.getFront()%></p>
-								</div>
-								<div class="flip-card-back">
-									<p class="card-text"><%=fc.getBack()%></p>
-								</div>
-							</div>
+	<div class="container-fluid bg-info">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>
+						<span class="label label-warning" id="qid">2</span> THREE is
+						CORRECT
+					</h3>
+				</div>
+				<div class="modal-body">
+					<div class="col-xs-3 col-xs-offset-5">
+						<div id="loadbar" style="display: none;">
+							<div class="blockG" id="rotateG_01"></div>
+							<div class="blockG" id="rotateG_02"></div>
+							<div class="blockG" id="rotateG_03"></div>
+							<div class="blockG" id="rotateG_04"></div>
+							<div class="blockG" id="rotateG_05"></div>
+							<div class="blockG" id="rotateG_06"></div>
+							<div class="blockG" id="rotateG_07"></div>
+							<div class="blockG" id="rotateG_08"></div>
 						</div>
 					</div>
+
+					<div class="quiz" id="quiz" data-toggle="buttons">
+						<label class="element-animation1 btn btn-lg btn-primary btn-block">
+							<span class="btn-label"> <i
+								class="glyphicon glyphicon-chevron-right"></i>
+						</span> <input type="radio" name="q_answer" value="1">1 One
+						</label> <label
+							class="element-animation2 btn btn-lg btn-primary btn-block"><span
+							class="btn-label"><i
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="2">2 Two</label> <label
+							class="element-animation3 btn btn-lg btn-primary btn-block"><span
+							class="btn-label"><i
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="3">3 Three</label> <label
+							class="element-animation4 btn btn-lg btn-primary btn-block"><span
+							class="btn-label"><i
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="4">4 Four</label>
+					</div>
+				</div>
+				<div class="modal-footer text-muted">
+					<span id="answer"></span>
 				</div>
 			</div>
-			<%
-				i++;
-				}
-			%>
 		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
-		</a>
 	</div>
-
-
-	<!-- for table  -->
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-
 </body>
 
 </html>
