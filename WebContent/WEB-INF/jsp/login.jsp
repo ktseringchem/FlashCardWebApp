@@ -74,7 +74,7 @@
 						</p>
 					</form:form>
 					<form action="Login" method="POST" class="login-form"> <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
-						<input type="text" name="email" placeholder="username is your email" /> 
+						<input type="text" name="uname" placeholder="username is your email" /> 
 						<input type="password" name="upasswd" placeholder="password" />
 						<button>login</button>
 						
