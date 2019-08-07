@@ -14,18 +14,17 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
 
 <title>landing page</title>
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
 <title>Welcome page</title>
 
@@ -59,11 +58,11 @@
 	<nav class="logo">
 		<h4>the nav</h4>
 		<ul class="nav-links">
-			<li><a href="LandingPage">Landing</a></li>
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="#">quize</a></li>
+			<li><a href="QuizPage">quize</a></li>
+			<li><a href="Logout">Logout</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>
@@ -83,19 +82,21 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 			</ol>
+			<!-- Slides - loop through to create card -->
 			<div class="carousel-inner" role="listbox"
 				style="background: url(${bgbanner03JPG}) no-repeat fixed; background-size: cover;">
 				<%
-					Flashcarduser fc_user = (Flashcarduser) session.getAttribute("sFlashcarduser");
-					List<FlashCards> fcs = (List<FlashCards>) session.getAttribute("sFlashCards");
+					CardServices cService = new CardServices();
+					List<FlashCards> flashcardlist = cService.getAllFlashCard();
+					
 					int i = 0;
-					for (FlashCards fc : fcs.subList(0, 10)) {
+					for (FlashCards fc : flashcardlist.subList(0, 10)) {
 						String active = "";
 						if (i < 1) {
 							active = "active";
 						}
 				%>
-				<!-- Slide One - Set the background image for this slide in the line below -->
+				
 				<div class="carousel-item <%=active%>">
 					<div class="carousel-caption d-none d-md-block">
 						<div class="flip-card">
@@ -126,9 +127,8 @@
 			</a>
 		</div>
 	</header>
-	<h1>
-		Welcome
-		<%=fc_user.getCname()%></h1>
+	
+	<h1>What is happening!</h1>
 	<div class="container">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -156,7 +156,7 @@
 				</thead>
 				<tbody>
 					<%
-						for (FlashCards fc : fcs) {
+						for (FlashCards fc : flashcardlist) {
 					%>
 					<tr>
 						<td><%=fc.getFront()%></td>
@@ -168,7 +168,7 @@
 								class="material-icons">&#xE254;</i>
 						</a> <a class="delete" title="Delete" data-toggle="tooltip"> <i
 								onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>"
-								class="material-icons">&#xE872;</i> <%-- onClick="onDelete(this);" id="<%=fc.getFlashcard_id()%>" --%>
+								class="material-icons">&#xE872;</i>
 						</a></td>
 					</tr>
 					<%

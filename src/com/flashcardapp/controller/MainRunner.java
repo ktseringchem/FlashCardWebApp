@@ -1,17 +1,15 @@
 package com.flashcardapp.controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
+
+import com.flashcardapp.service.CardServices;
 
 public class MainRunner {
 
 	public static void main(String[] args) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.close();
-		entityManagerFactory.close();
-
+		CardServices cser = new CardServices();
+		List<String> fc_list = cser.fiveRandomCard();
+		System.out.println(fc_list);
 	}
 
 }

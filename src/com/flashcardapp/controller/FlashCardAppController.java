@@ -1,15 +1,13 @@
 package com.flashcardapp.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,34 +49,81 @@ public class FlashCardAppController {
 
 	// This Handler will direct you to login.jsp
 	@RequestMapping("/LoginPage")
-	public ModelAndView getLoginPage() {
-		ModelAndView mv = new ModelAndView("login");
-		mv.addObject("userKey", new Flashcarduser());
-		return mv;
-	}
-
-	// This Handler will direct you to welcomepage.jsp
-	@RequestMapping("/WelcomePage")
-	public ModelAndView getWelcomepage(@SessionAttribute("sFlashcarduser") Flashcarduser sfuser) {
+	public ModelAndView getLoginPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
-		CardServices cService = new CardServices();
-		List<FlashCards> flashcardlist = cService.getAllFlashCard();
-		mv.addObject("sFlashCards", flashcardlist);
+		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
+		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+			mv.setViewName("redirect:/Logout");
+			return mv;
+		} else {
 
-		mv.setViewName("welcomepage");
-		return mv;
+			mv.addObject("userKey", new Flashcarduser());
+			mv.setViewName("login");
+			return mv;
+		}
+	}
+
+	// This Handler will direct you to welcomepage.jsp which is home
+	@RequestMapping("/WelcomePage")
+	public ModelAndView getWelcomepage(HttpSession session) {
+		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
+		
+		ModelAndView mv = new ModelAndView();
+		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+			mv.setViewName("welcomepage");
+//			mv.addObject("id", flashcarduser.getUser_id());
+			return mv;
+		} else {
+			mv.setViewName("redirect:/LoginPage");
+			return mv;
+		}
+
 	}
 
 	// This Handler will direct you to study.jsp
 	@RequestMapping("/StudyPage")
-	public ModelAndView getStudyPage() {
-		return new ModelAndView("study");
+	public ModelAndView getStudyPage(HttpSession session) {
+		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
+		ModelAndView mv = new ModelAndView();
+		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+			
+			mv.setViewName("study");
+			return mv;
+		} else {
+			mv.setViewName("redirect:/LoginPage");
+			return mv;
+		}
 	}
 
+	// This Handler will direct you to quiz.jsp
+	@RequestMapping("/QuizPage")
+	public ModelAndView getQuizPage(HttpSession session) 
+	{
+		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
+		ModelAndView mv = new ModelAndView();
+
+		if (flashcarduser != null && session.getAttribute("uname") != null 
+				&& session.getAttribute("upasswd") != null) 
+		{
+			mv.setViewName("quiz");
+			return mv;
+		} 
+		else 
+		{
+			mv.setViewName("redirect:/LoginPage");
+			return mv;
+		}
+	}
+
+	/********************************************************************
+	 * End of navigation
+	 ***************************************************************/
+
+//	This handler will receive login request and direct user to welcomepage request handler 
 	@RequestMapping(value = "/Login", method = { RequestMethod.POST })
-	public ModelAndView doPost(Model model, @RequestParam("uname") String uname,
-			@RequestParam("upasswd") String upasswd) {
+	public ModelAndView doPost(@RequestParam("uname") String uname, @RequestParam("upasswd") String upasswd,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
 		UserServices uService = new UserServices();
@@ -88,30 +132,39 @@ public class FlashCardAppController {
 		if (user != null) {
 			mv.setViewName("redirect:/WelcomePage");
 			mv.addObject("sFlashcarduser", user);
+			session.setAttribute("uname", uname);
+			session.setAttribute("upasswd", upasswd);
+
 			return mv;
 		} else {
-			mv.addObject("WrongCred", "block");
-			mv.setViewName("login");
+			session.setAttribute("WrongCred", "block");
+			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
 	}
 
+	// This Handler will clear the session and direct user to login.jsp
+	@RequestMapping("/Logout")
+	public String getLoginPageAfterLogOut(HttpSession session) {
+		session.removeAttribute("uname");
+		session.removeAttribute("upasswd");
+		session.removeAttribute("sFlashcarduser");
+		session.invalidate();
+		return "redirect:/LoginPage";
+	}
+
 	@RequestMapping("/Register")
-	public ModelAndView registerFlashCardUser(
-			@Valid @ModelAttribute("userKey") Flashcarduser flashcarduser,
-			BindingResult errors) 
-	{
+	public ModelAndView registerFlashCardUser(@Valid @ModelAttribute("userKey") Flashcarduser flashcarduser,
+			BindingResult errors) {
 		ModelAndView mv = new ModelAndView();
 
-		if (errors.hasErrors()) 
-		{
-//			mv.addObject("inCorrectReg", "block");
+		if (errors.hasErrors()) {
+			mv.addObject("inCorrectReg", "block");
 			mv.setViewName("login");
 			return mv;
-		} 
-		else 
-		{
+		} else {
 			UserServices uService = new UserServices();
+			mv.addObject("CorrectReg", "block");
 			uService.registerCardUser(flashcarduser.getEmail(), flashcarduser.getCname(), flashcarduser.getPassword());
 			mv.setViewName("welcomepage");
 			return mv;
@@ -153,11 +206,10 @@ public class FlashCardAppController {
 		cardServices.updateFlashCard(front, back, id);
 
 	}
-	
+
 	@InitBinder
-	public void initBinder(WebDataBinder binder)
-	{
-		binder.setDisallowedFields(new String[] {"cName"});
+	public void initBinder(WebDataBinder binder) {
+		binder.setDisallowedFields(new String[] { "cName" });
 	}
 
 }

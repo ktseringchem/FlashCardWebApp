@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,8 @@
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="#">quize</a></li>
+			<li><a href="QuizPage">Quiz</a></li>
+			<li><a href="Logout">Logout</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>
@@ -54,25 +55,33 @@
 		<div class="hero-overlay">
 			<div class="login-page" Style="padding: 8% 0 0;">
 				<div class="form">
-					<form:form method="POST" action="Register" class="register-form" modelAttribute="userKey">
-						
-						<form:input type="text" path="cname" placeholder="Enter Full Name" id="cname" />
-						 <form:errors path="cname" />
-						 
-						<input type="password" name="password" placeholder="password" />
-						
-						<form:input type="text" path="email" placeholder="Enter email address" id="email"/>
+					<form:form method="POST" action="Register" class="register-form"
+						modelAttribute="userKey">
+
+						<form:input type="text" path="cname" placeholder="Enter Full Name"
+							id="cname" />
+						<form:errors path="cname" style="color:red;"/>
+
+						<form:input type="password" path="password" placeholder="password" />
+						<form:errors path="password" style="color:red;" />
+
+						<form:input type="email" path="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+							placeholder="Enter email address" id="email" />
 						<form:errors path="email" />
 						<input type="submit" value="create" />
 						<p class="message">
 							Already registered? <a href="#">Sign In</a>
 						</p>
 					</form:form>
-					<form action="Login" method="POST" class="login-form">
-						<input type="text" name="uname" placeholder="username" /> <input
-							type="password" name="upasswd" placeholder="password" />
+					<form action="Login" method="POST" class="login-form"> <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
+						<input type="text" name="uname" placeholder="username is your email" /> 
+						<input type="password" name="upasswd" placeholder="password" />
 						<button>login</button>
-						<p style="display: none; display: ${RightCred}; color: green;">You are registred, please try logging in</p>
+						
+						<p style="display: none; display: ${inCorrectReg}; color: red">
+							you were not registered</p>
+						<p style="display: none; display: ${CorrectReg}; color: green;">You
+							are registered, please try logging in</p>
 						<p style="display: none; display: ${WrongCred}; color: red;">Wrong
 							credential, please try registering</p>
 						<p class="message">

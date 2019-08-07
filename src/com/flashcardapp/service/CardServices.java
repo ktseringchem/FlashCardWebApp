@@ -2,125 +2,113 @@ package com.flashcardapp.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.flashcardapp.DaoI.CardDaoI;
+import com.flashcardapp.DaoI.UserDaoI;
 import com.flashcardapp.entities.FlashCards;
 
-public class CardServices {
-	
-	public boolean addFlashCard(String front, String back)
-	{
+public class CardServices implements CardDaoI {
+
+	public boolean addFlashCard(String front, String back) {
 		boolean result = false;
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		FlashCards flashcard = new FlashCards(front, back);
-		try
-		{
+		try {
 			entityManager.getTransaction().begin();
 			entityManager.persist(flashcard);
 			entityManager.getTransaction().commit();
 			result = true;
-			
-		}
-		catch (Exception e) 
-		{
+
+		} catch (Exception e) {
 			e.getMessage();
 			result = false;
-		}
-		finally
-		{
+		} finally {
 			entityManager.close();
 			entityManagerFactory.close();
 		}
 		return result;
 	}
-	
-	public List<FlashCards> getAllFlashCard()
-	{
+
+	public List<FlashCards> getAllFlashCard() {
 		List<FlashCards> result = new ArrayList<FlashCards>();
-		
+
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		try
-		{
+		try {
 			Query query = entityManager.createNamedQuery("getAllFlashCard");
 //			query.setParameter("user_id", user_id);
-			result = query.getResultList();  
-		}
-		catch (Exception e) 
-		{
+			result = query.getResultList();
+		} catch (Exception e) {
 			result = null;
 			System.out.println(result);
-		}
-		finally
-		{
+		} finally {
 			entityManager.close();
 			entityManagerFactory.close();
 		}
 		return result;
 	}
-	
 
-	public void removeFlashCard(int flashcard_id) 
-	{
+	public void removeFlashCard(int flashcard_id) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		try
-		{
+		try {
 			entityManager.getTransaction().begin();
 			Query query = entityManager.createNamedQuery("removeFlashCardbyId");
 			query.setParameter("fc_id", flashcard_id);
 			query.executeUpdate();
 			entityManager.getTransaction().commit();
-		}
-		catch (Exception e) 
-		{
-			
-		}
-		finally
-		{
+		} catch (Exception e) {
+
+		} finally {
 			entityManager.close();
 			entityManagerFactory.close();
 		}
-		
-	}
-	
-	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) 
-	{
-	    List<T> r = new ArrayList<T>(c.size());
-	    for(Object o: c)
-	      r.add(clazz.cast(o));
-	    return r;
+
 	}
 
 	public void updateFlashCard(String front, String back, String id) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		int fc_id = Integer.parseInt(id);
-		try
-		{
+		try {
 			FlashCards fc = entityManager.find(FlashCards.class, fc_id);
-			System.out.println(fc.getFlashcard_id());
+
 			entityManager.getTransaction().begin();
 			fc.setFront(front);
 			fc.setBack(back);
 			entityManager.getTransaction().commit();
-		}
-		catch (Exception e) 
-		{
-			
-		}
-		finally
-		{
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
 			entityManager.close();
 			entityManagerFactory.close();
 		}
-		
+
+	}
+
+	@Override
+	public List<String> fiveRandomCard() {
+		List<FlashCards> flashcardlist = getAllFlashCard();
+		List<String> ans = new ArrayList<String>();
+		Random rand = new Random();
+
+		for (int j = 0; j < 4; j++) {
+			FlashCards randFC = flashcardlist.get(rand.nextInt(flashcardlist.size()));
+
+			ans.add(randFC.getBack());
+		}
+
+//		Collections.shuffle(ans);
+		return ans;
 	}
 
 }

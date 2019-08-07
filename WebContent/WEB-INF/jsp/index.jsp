@@ -46,7 +46,7 @@
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="#">quize</a></li>
+			<li><a href="QuizPage">quize</a></li>
 		</ul>
 		<div class="burger">
 			<div class="line1"></div>

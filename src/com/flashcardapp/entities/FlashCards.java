@@ -34,7 +34,7 @@ public class FlashCards {
 	private Timestamp timestamp;
 	@JoinColumn(name="User_id")
 	@ManyToOne
-	private Flashcarduser Flashcarduser;
+	private Flashcarduser flashcarduser;
 	
 	
 	public FlashCards() {
@@ -48,20 +48,18 @@ public class FlashCards {
 		this.back = back;
 	}
 
-	public FlashCards(String front, String back, com.flashcardapp.entities.Flashcarduser flashcarduser) {
+	public FlashCards(String front, String back,  int User_id) {
 		super();
 		this.front = front;
 		this.back = back;
-		Flashcarduser = flashcarduser;
+		User_id = flashcarduser.getUser_id();
 	}
-	public FlashCards(int flashcard_id, String front, String back, Timestamp timestamp,
-			com.flashcardapp.entities.Flashcarduser flashcarduser) {
+	public FlashCards(int flashcard_id, String front, String back, Flashcarduser flashcarduser) {
 		super();
 		this.flashcard_id = flashcard_id;
 		this.front = front;
 		this.back = back;
-		this.timestamp = timestamp;
-		Flashcarduser = flashcarduser;
+		this.flashcarduser = flashcarduser;
 	}
 	public int getFlashcard_id() {
 		return flashcard_id;
@@ -88,15 +86,50 @@ public class FlashCards {
 		this.timestamp = timestamp;
 	}
 	public Flashcarduser getFlashcarduser() {
-		return Flashcarduser;
+		return flashcarduser;
 	}
 	public void setFlashcarduser(Flashcarduser flashcarduser) {
-		Flashcarduser = flashcarduser;
+		this.flashcarduser = flashcarduser;
 	}
 	@Override
 	public String toString() {
 		return "FlashCards [flashcard_id=" + flashcard_id + ", front=" + front + ", back=" + back + ", timestamp="
-				+ timestamp + ", Flashcarduser=" + Flashcarduser + "]";
+				+ timestamp + ", Flashcarduser=" + flashcarduser + "]";
 	}
-		
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((back == null) ? 0 : back.hashCode());
+		result = prime * result + flashcard_id;
+		result = prime * result + ((front == null) ? 0 : front.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FlashCards other = (FlashCards) obj;
+		if (back == null) {
+			if (other.back != null)
+				return false;
+		} else if (!back.equals(other.back))
+			return false;
+		if (flashcard_id != other.flashcard_id)
+			return false;
+		if (front == null) {
+			if (other.front != null)
+				return false;
+		} else if (!front.equals(other.front))
+			return false;
+		return true;
+	}
+
+	
 }
