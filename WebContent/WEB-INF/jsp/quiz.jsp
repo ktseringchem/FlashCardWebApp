@@ -57,6 +57,7 @@
 			<div class="line3"></div>
 		</div>
 	</nav>
+	
 	<div class="container-fluid bg-info">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -82,18 +83,26 @@
 
 					<div class="quiz" id="quiz" data-toggle="buttons">
 						<label class="element-animation1 btn btn-lg btn-primary btn-block">
-							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="1">1 One
-						</label> <label
-							class="element-animation2 btn btn-lg btn-primary btn-block"><span
-							class="btn-label"><i
-								class="glyphicon glyphicon-chevron-right"></i></span> <input
-							type="radio" name="q_answer" value="2">2 Two</label> <label
-							class="element-animation3 btn btn-lg btn-primary btn-block"><span
-							class="btn-label"><i
-								class="glyphicon glyphicon-chevron-right"></i></span> <input
-							type="radio" name="q_answer" value="3">3 Three</label> <label
+							<span class="btn-label"> 
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</span> 
+							<input type="radio" name="q_answer" value="1">
+							1 One
+						</label> 
+						
+						<label class="element-animation2 btn btn-lg btn-primary btn-block">
+							<span class="btn-label">
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</span> 
+							<input type="radio" name="q_answer" value="2">
+							2 Two
+						</label> 
+						
+						<label class="element-animation3 btn btn-lg btn-primary btn-block">
+							<span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> 
+							<input type="radio" name="q_answer" value="3">3 Three
+							</label> 
+						<label
 							class="element-animation4 btn btn-lg btn-primary btn-block"><span
 							class="btn-label"><i
 								class="glyphicon glyphicon-chevron-right"></i></span> <input

@@ -1,8 +1,6 @@
 package com.flashcardapp.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -55,11 +51,13 @@ public class FlashCardAppController {
 	@RequestMapping("/LoginPage")
 	public ModelAndView getLoginPage(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
 		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
 			mv.setViewName("redirect:/Logout");
 			return mv;
 		} else {
+
 			mv.addObject("userKey", new Flashcarduser());
 			mv.setViewName("login");
 			return mv;
@@ -71,7 +69,6 @@ public class FlashCardAppController {
 	public ModelAndView getWelcomepage(HttpSession session) {
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
 		
-		System.out.println(flashcarduser);
 		ModelAndView mv = new ModelAndView();
 		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
 			mv.setViewName("welcomepage");
@@ -140,7 +137,7 @@ public class FlashCardAppController {
 
 			return mv;
 		} else {
-			mv.addObject("WrongCred", "block");
+			session.setAttribute("WrongCred", "block");
 			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
@@ -162,11 +159,12 @@ public class FlashCardAppController {
 		ModelAndView mv = new ModelAndView();
 
 		if (errors.hasErrors()) {
-//			mv.addObject("inCorrectReg", "block");
+			mv.addObject("inCorrectReg", "block");
 			mv.setViewName("login");
 			return mv;
 		} else {
 			UserServices uService = new UserServices();
+			mv.addObject("CorrectReg", "block");
 			uService.registerCardUser(flashcarduser.getEmail(), flashcarduser.getCname(), flashcarduser.getPassword());
 			mv.setViewName("welcomepage");
 			return mv;

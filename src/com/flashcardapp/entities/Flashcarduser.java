@@ -29,10 +29,12 @@ public class Flashcarduser {
 //	@EmailConstraint
 	private String email;
 
-	@Size(min = 2, max = 20, message = "First name length must be between {2} and {1}")
+	@Size(min = 2, max = 20, message = "Full name length must be between {2} and {1}")
 	private String cname;
+	
+	@Size(min = 5, max = 9, message = "The password length must be between {2} and {1}")
 	private String password;
-
+	
 	public Flashcarduser() {
 		super();
 		// TODO Auto-generated constructor stub

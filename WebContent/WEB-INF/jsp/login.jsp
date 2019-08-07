@@ -60,11 +60,12 @@
 
 						<form:input type="text" path="cname" placeholder="Enter Full Name"
 							id="cname" />
-						<form:errors path="cname" />
+						<form:errors path="cname" style="color:red;"/>
 
-						<input type="password" name="password" placeholder="password" />
+						<form:input type="password" path="password" placeholder="password" />
+						<form:errors path="password" style="color:red;" />
 
-						<form:input type="text" path="email"
+						<form:input type="email" path="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 							placeholder="Enter email address" id="email" />
 						<form:errors path="email" />
 						<input type="submit" value="create" />
@@ -72,12 +73,15 @@
 							Already registered? <a href="#">Sign In</a>
 						</p>
 					</form:form>
-					<form action="Login" method="POST" class="login-form">
-						<input type="text" name="uname" placeholder="username" /> <input
-							type="password" name="upasswd" placeholder="password" />
+					<form action="Login" method="POST" class="login-form"> <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
+						<input type="text" name="email" placeholder="username is your email" /> 
+						<input type="password" name="upasswd" placeholder="password" />
 						<button>login</button>
-						<p style="display: none; display: ${RightCred}; color: green;">You
-							are registred, please try logging in</p>
+						
+						<p style="display: none; display: ${inCorrectReg}; color: red">
+							you were not registered</p>
+						<p style="display: none; display: ${CorrectReg}; color: green;">You
+							are registered, please try logging in</p>
 						<p style="display: none; display: ${WrongCred}; color: red;">Wrong
 							credential, please try registering</p>
 						<p class="message">
