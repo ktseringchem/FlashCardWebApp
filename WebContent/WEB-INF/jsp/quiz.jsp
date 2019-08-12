@@ -49,7 +49,7 @@
 			<li><a href="LoginPage">Login</a></li>
 			<li><a href="WelcomePage">Home</a></li>
 			<li><a href="StudyPage">Study</a></li>
-			<li><a href="QuizPage">quize</a></li>
+			<li><a href="QuizPage">quiz</a></li>
 			<li><a href="Logout">Logout</a></li>
 		</ul>
 		<div class="burger">
@@ -79,7 +79,6 @@
 					<h3>
 						<span class="label label-warning" id="qid"><%=i%></span> Define
 						<%=fc.getFront()%>
-						<input type="hidden" id="correctANS" value="<%=correctANS%>" />
 					</h3>
 				</div>
 				<div class="modal-body">
@@ -97,7 +96,7 @@
 					</div>
 
 					<div class="quiz" id="quiz" data-toggle="buttons">
-						
+						<input type="hidden" id="correctANS" value="<%=correctANS%>" />
 						<label class="element-animation1 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
 								class="glyphicon glyphicon-chevron-right"></i>
@@ -110,7 +109,7 @@
 							class="element-animation2 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
 								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="1" onClick="onAnswerClick(this)"> 2. <%=fc_list.get(1)%>
+						</span> <input type="radio" name="q_answer" value="1"> 2. <%=fc_list.get(1)%>
 						</label> <label
 							class="element-animation3 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
@@ -132,7 +131,7 @@
 						</label>
 					</div>
 				</div>
-				<div class="modal-footer text-muted">
+				<div id="answerhouse" class="modal-footer text-muted">
 					<span id="answer"></span>
 				</div>
 			</div>

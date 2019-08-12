@@ -15,7 +15,8 @@ $(function(){
     	$('#loadbar').show();
     	$('#quiz').fadeOut();
     	setTimeout(function(){
-           $( "#answer" ).html(  $(this).checking(choice) );      
+           $( "#answer").html(  $(this).checking(choice) );
+           console.log($( "#answer"));
             $('#quiz').show();
             $('#loadbar').fadeOut();
            /* something else */

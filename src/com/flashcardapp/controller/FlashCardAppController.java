@@ -1,6 +1,8 @@
 package com.flashcardapp.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,8 +79,11 @@ public class FlashCardAppController {
 				&& session.getAttribute("uname") != null 
 				&& session.getAttribute("upasswd") != null) 
 		{
+			CardServices cService = new CardServices();
+			List<FlashCards> flashcardlist = cService.getAllFlashCard();
+			mv.addObject("totalCards", flashcardlist.size());
+			
 			mv.setViewName("welcomepage");
-//			mv.addObject("id", flashcarduser.getUser_id());
 			return mv;
 		} 
 		else 

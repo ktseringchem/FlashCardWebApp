@@ -12,6 +12,11 @@
 <c:url value="/resources/css/style-welcomepage.css"
 	var="stylewelcomepageCSS" />
 <link rel="stylesheet" href="${stylewelcomepageCSS }">
+
+<!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
 <style type="text/css">
 .grid-container {
 	display: grid;
@@ -62,7 +67,7 @@
 	list-style-type: none;
 }
 
-.sidenav__list-item {
+.sidenav__list-item a{
 	padding: 20px 20px 20px 40px;
 	color: #ddd;
 }
@@ -249,11 +254,11 @@
 
 		<aside class="sidenav">
 			<ul class="sidenav__list">
-				<li class="sidenav__list-item">Item One</li>
-				<li class="sidenav__list-item">Item Two</li>
-				<li class="sidenav__list-item">Item Three</li>
-				<li class="sidenav__list-item">Item Four</li>
-				<li class="sidenav__list-item">Item Five</li>
+				<li class="sidenav__list-item"><a href="LandingPage">Landing</a></li>
+				<li class="sidenav__list-item"><a href="LoginPage">Login</a></li>
+				<li class="sidenav__list-item"><a href="WelcomePage">Home</a></li>
+				<li class="sidenav__list-item"><a href="StudyPage">Study</a></li>
+				<li class="sidenav__list-item"><a href="QuizPage">quize</a></li>
 			</ul>
 			<div class="sidenav__close-icon">
 				<i class="fas fa-times"></i>
@@ -262,14 +267,14 @@
 
 		<main class="main">
 		<div class="main-header">
-			<div class="main-header__heading">Hello User</div>
-			<div class="main-header__updates">Recent Items</div>
+			<div class="main-header__heading">Total Card</div>
+			<div class="main-header__updates">${totalCards}</div>
 		</div>
 
 		<div class="main-overview">
 			<div class="overviewcard">
-				<div class="overviewcard__icon">Overview</div>
-				<div class="overviewcard__info">Card</div>
+				<div class="overviewcard__icon">Total Card</div>
+				<div class="overviewcard__info">${totalCards}</div>
 			</div>
 			<div class="overviewcard">
 				<div class="overviewcard__icon">Overview</div>
