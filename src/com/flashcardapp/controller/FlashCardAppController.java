@@ -29,6 +29,9 @@ import com.flashcardapp.service.UserServices;
 @SessionAttributes(value = { "sFlashcarduser", "sFlashCards" })
 public class FlashCardAppController {
 
+//	Helper method. Initializes the session attribute.
+//  Method name convention: setUp+session attribute name
+//  e.g. session attribute name: sEmployee , method name: setUpsEmployee()
 	@ModelAttribute("sFlashcarduser")
 	public Flashcarduser setUpFlashCarduser() {
 		Flashcarduser fcuser = new Flashcarduser();
@@ -70,11 +73,16 @@ public class FlashCardAppController {
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
 		
 		ModelAndView mv = new ModelAndView();
-		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+		if (flashcarduser != null 
+				&& session.getAttribute("uname") != null 
+				&& session.getAttribute("upasswd") != null) 
+		{
 			mv.setViewName("welcomepage");
 //			mv.addObject("id", flashcarduser.getUser_id());
 			return mv;
-		} else {
+		} 
+		else 
+		{
 			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
