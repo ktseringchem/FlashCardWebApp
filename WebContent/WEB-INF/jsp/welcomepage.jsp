@@ -16,6 +16,7 @@
 <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+<c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
 
 <style type="text/css">
 .grid-container {
@@ -85,7 +86,8 @@
 	height: 150px;
 	/* Force our height since we don't have actual content yet */
 	background-color: #e3e4e6;
-	color: slategray;
+	color: #B404AE;
+	font-size: 35px;
 }
 
 .main-overview {
@@ -248,8 +250,8 @@
 			<i class="fas fa-bars"></i>
 		</div>
 		<header class="header">
-			<div class="header__search">Search...</div>
-			<div class="header__avatar">Your face</div>
+			<div class="header__search"></div>
+			<div class="header__avatar"></div>
 		</header>
 
 		<aside class="sidenav">
@@ -266,9 +268,10 @@
 		</aside>
 
 		<main class="main">
-		<div class="main-header">
-			<div class="main-header__heading">Total Card</div>
-			<div class="main-header__updates">${totalCards}</div>
+		<div class="main-header" style="background: url(${bgbanner03JPG}) no-repeat fixed; background-size: cover; background-position: 0px -75px;">
+			<div class="main-header__heading"></div>
+			Welcome ${sFlashcarduser.cname}
+			<div class="main-header__updates"></div>
 		</div>
 
 		<div class="main-overview">

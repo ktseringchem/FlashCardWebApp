@@ -28,12 +28,8 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<script type="text/javascript"
-	src="<c:url value="/resources/script/js-quiz.js" />"></script>
+<!-- custum CSS -->
 <link href="<c:url value="/resources/css/style-quiz.css" />"
 	rel="stylesheet">
 
@@ -69,7 +65,6 @@
 			fc_list.add(fc.getBack());
 			Collections.shuffle(fc_list);
 			int correctANS = fc_list.indexOf(fc.getBack());
-			System.out.println(correctANS);
 			
 	%>
 	<div class="container-fluid bg-info" id="" style="">
@@ -97,25 +92,28 @@
 
 					<div class="quiz" id="quiz" data-toggle="buttons">
 						<input type="hidden" id="correctANS" value="<%=correctANS%>" />
+						
 						<label class="element-animation1 btn btn-lg btn-primary btn-block">
-							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-							</span> 
-							<input type="radio" name="q_answer" value="0"> 1. <%=fc_list.get(0)%>
+							<span class="btn-label"> <i class="glyphicon glyphicon-chevron-right"></i></span> 
+							<input type="radio" name="q_answer" value="0"> 
+							1. <%=fc_list.get(0)%>
 						</label> 
 						
 						
+						<label class="element-animation2 btn btn-lg btn-primary btn-block">
+							<span class="btn-label"> <i class="glyphicon glyphicon-chevron-right"></i></span> 
+							<input type="radio" name="q_answer" value="1"> 
+							2. <%=fc_list.get(1)%>
+						</label> 
+						
 						<label
-							class="element-animation2 btn btn-lg btn-primary btn-block">
-							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="1"> 2. <%=fc_list.get(1)%>
-						</label> <label
 							class="element-animation3 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
 								class="glyphicon glyphicon-chevron-right"></i>
 						</span> <input type="radio" name="q_answer" value="2"> 3. <%=fc_list.get(2)%>
-						</label> <label
+						</label> 
+						
+						<label
 							class="element-animation4 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
 								class="glyphicon glyphicon-chevron-right"></i>
@@ -141,6 +139,13 @@
 		i++;
 		}
 	%>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript"
+	src="<c:url value="/resources/script/js-quiz.js" />"></script>
 </body>
 
 </html>

@@ -184,25 +184,25 @@ public class FlashCardAppController {
 		}
 	}
 
-	@RequestMapping("/createcard")
-	public @ResponseBody ModelAndView createFlashCard(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String frontcard = request.getParameter("frontcard");
-		String backcard = request.getParameter("backcard");
-		CardServices cardServices = new CardServices();
-		boolean result = cardServices.addFlashCard(frontcard, backcard);
-
-		if (result) {
-			request.setAttribute("createCardMessage", "block");
-		} else {
-			request.setAttribute("notCreateCardMessage", "block");
-		}
-
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("welcomepage");
-		mv.addObject(request);
-		return mv;
-	}
+//	@RequestMapping("/createcard")
+//	public @ResponseBody ModelAndView createFlashCard(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		String frontcard = request.getParameter("frontcard");
+//		String backcard = request.getParameter("backcard");
+//		CardServices cardServices = new CardServices();
+//		boolean result = cardServices.addFlashCard(frontcard, backcard, 2);
+//
+//		if (result) {
+//			request.setAttribute("createCardMessage", "block");
+//		} else {
+//			request.setAttribute("notCreateCardMessage", "block");
+//		}
+//
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("welcomepage");
+//		mv.addObject(request);
+//		return mv;
+//	}
 
 	@RequestMapping("/deletecard/{id}")
 	public @ResponseBody void deleteFlashCard(@PathVariable String id)// @RequestParam(value="Remove") int flashcard_id)
@@ -212,12 +212,24 @@ public class FlashCardAppController {
 	}
 
 	@RequestMapping("/edit/{front}/{back}/{id}")
-	public @ResponseBody void editFlashCard(@PathVariable String front, @PathVariable String back,
-			@PathVariable String id) {
-		System.out.println(front + ", " + back + ", " + id);
+	public @ResponseBody void editFlashCard(
+			@PathVariable String front, 
+			@PathVariable String back,
+			@PathVariable String id) 
+	{
+		
 		CardServices cardServices = new CardServices();
-		cardServices.updateFlashCard(front, back, id);
-
+		FlashCards found_fc = (FlashCards) cardServices.getFlashCardById(Integer.parseInt(id));
+		if(found_fc != null)
+		{
+			System.out.println("flash card edited");
+			cardServices.updateFlashCard(front, back, id);
+		}
+		else
+		{
+			System.out.println("flash card added");
+			cardServices.addFlashCard(front, back, Integer.parseInt(id));
+		}
 	}
 
 	@InitBinder

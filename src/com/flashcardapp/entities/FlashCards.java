@@ -47,20 +47,15 @@ public class FlashCards {
 		this.front = front;
 		this.back = back;
 	}
-
-	public FlashCards(String front, String back,  int User_id) {
+		
+	public FlashCards(String front, String back, Timestamp timestamp, Flashcarduser flashcarduser) {
 		super();
 		this.front = front;
 		this.back = back;
-		User_id = flashcarduser.getUser_id();
-	}
-	public FlashCards(int flashcard_id, String front, String back, Flashcarduser flashcarduser) {
-		super();
-		this.flashcard_id = flashcard_id;
-		this.front = front;
-		this.back = back;
+		this.timestamp = timestamp;
 		this.flashcarduser = flashcarduser;
 	}
+	
 	public int getFlashcard_id() {
 		return flashcard_id;
 	}

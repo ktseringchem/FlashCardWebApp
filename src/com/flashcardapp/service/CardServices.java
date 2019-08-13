@@ -17,7 +17,7 @@ import com.flashcardapp.entities.FlashCards;
 
 public class CardServices implements CardDaoI {
 
-	public boolean addFlashCard(String front, String back) {
+	public boolean addFlashCard(String front, String back, int id) {
 		boolean result = false;
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -88,6 +88,23 @@ public class CardServices implements CardDaoI {
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.getMessage();
+		} finally {
+			entityManager.close();
+			entityManagerFactory.close();
+		}
+
+	}
+	
+	public FlashCards getFlashCardById(int id) {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("FlashCardWebApp");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		try {
+			FlashCards fc = entityManager.find(FlashCards.class, id);
+			return fc;
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
 		} finally {
 			entityManager.close();
 			entityManagerFactory.close();
