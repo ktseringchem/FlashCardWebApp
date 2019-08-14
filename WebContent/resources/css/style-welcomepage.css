@@ -1,108 +1,163 @@
 @charset "ISO-8859-1";
-
-body {
-	font-family: Arial, Helvetica, sans-serif;
-	background-color: palevioletred;
+.grid-container {
+	display: grid;
+	grid-template-columns: 240px 1fr;
+	grid-template-rows: 50px 1fr 50px;
+	grid-template-areas: "sidenav header" "sidenav main" "sidenav footer";
+	height: 100vh;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+.header {
+	grid-area: header;
+	background-color: #648ca6;
 }
 
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 8vh;
-  background-color: blueviolet;
-  font-family: "Poppins", sans-serif;
+.sidenav {
+	grid-area: sidenav;
+	background-color: #394263;
 }
 
-.logo {
-  color: rgb(226, 226, 226);
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 22px;
+.main {
+	grid-area: main;
+	background-color: #8fd4d9;
 }
 
-.nav-links {
-  display: flex;
-  justify-content: space-around;
-  width: 30%;
+.footer {
+	grid-area: footer;
+	background-color: #648ca6;
 }
 
-.nav-links li {
-  list-style: none;
+.header, .footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	background-color: #648ca6;
 }
 
-.nav-links a {
-  color: rgb(226, 226, 226);
-  text-decoration: none;
-  letter-spacing: 3px;
-  font-weight: bold;
-  font-size: 14px;
+.sidenav {
+	display: flex; /* Will be hidden on mobile */
+	flex-direction: column;
+	grid-area: sidenav;
+	background-color: #394263;
 }
 
-.burger {
-  display: none;
-  cursor: pointer;
+.sidenav__list {
+	padding: 0;
+	margin-top: 85px;
+	list-style-type: none;
 }
 
-.burger div {
-  width: 25px;
-  height: 3px;
-  background-color: rgb(226, 226, 226);
-  margin: 5px;
+.sidenav__list-item {
+	padding: 20px 20px 20px 40px;
+	color: #ddd;
 }
 
-@media screen and (max-width: 1024px) {
-  .nav-links {
-    width: 60%;
+.sidenav__list-item:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+	cursor: pointer;
+}
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px;
+	padding: 20px;
+	height: 150px;
+	/* Force our height since we don't have actual content yet */
+	background-color: #e3e4e6;
+	color: slategray;
+}
+
+.main-overview {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+	/* Where the magic happens */
+	grid-auto-rows: 94px;
+	grid-gap: 20px;
+	margin: 20px;
+}
+
+.overviewcard {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+	background-color: #d3d3;
+}
+
+.main-cards {
+	column-count: 2;
+	column-gap: 20px;
+	margin: 20px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background-color: #82bef6;
+	margin-bottom: 20px;
+	-webkit-column-break-inside: avoid;
+	padding: 24px;
+	box-sizing: border-box;
+}
+/* Force varying heights to simulate dynamic content */
+.card:first-child {
+	height: 485px;
+}
+
+.card:nth-child(2) {
+	height: 200px;
+}
+
+.card:nth-child(3) {
+	height: 265px;
+}
+
+ .grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Side nav is hidden on mobile */
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    height: 100vh;
   }
-
-}
-
-@media screen and (max-width: 768px) {
-  border {
-    overflow-x: hidden;
+  
+  .sidenav {
+    display: none;
+    grid-area: sidenav;
+    background-color: #394263;
   }
-
-  .nav-links {
-    position: absolute;
-    right: 0px;
-    height: 92vh;
-    top: 8vh;
-    background-color: blueviolet;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in;
+  
+  .main-cards {
+    column-count: 1;
+    column-gap: 20px;
+    margin: 20px;
   }
-
-  .nav-links li {
-    opacity: 0;
+  
+  /* Non-mobile styles, 750px breakpoint */
+  @media only screen and (min-width: 46.875em) {
+    /* Show the sidenav */
+    .grid-container {
+      grid-template-columns: 240px 1fr; /* Show the side nav for non-mobile screens */
+      grid-template-areas:
+        "sidenav header"
+        "sidenav main"
+        "sidenav footer";
+    }
+    .sidenav {
+      display: flex;
+      flex-direction: column;
+    }
   }
-
-  .burger {
-    display: block;
+  /* Medium-sized screen breakpoint (tablet, 1050px) */
+  @media only screen and (min-width: 65.625em) {
+    /* Break out main cards into two columns */
+    .main-cards {
+      column-count: 2;
+    }
   }
-}
-
-.nav-active {
-  transform: translateX(0%);
-}
-
-@keyframes navLinksFade {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-}

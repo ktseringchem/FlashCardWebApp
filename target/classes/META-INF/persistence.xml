@@ -8,7 +8,7 @@
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/flashcardusers"/>
 		<property name="javax.persistence.jdbc.user" value="root"/>
-		<property name="javax.persistence.jdbc.password" value=""/>
+		<property name="javax.persistence.jdbc.password" value="Retirementby40!!!"/>
 		<property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
 		<property name="eclipselink.ddl-generation" value="create-tables"/>
 		<!-- Aftert the line below the ddl-generation knows what is the language of the database -->

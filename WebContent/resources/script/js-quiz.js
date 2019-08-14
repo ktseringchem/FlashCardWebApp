@@ -1,6 +1,22 @@
 /**
  * 
  */
+console.log($('#correctANS').val());
+$("label.btn").on('click',function () {
+	var choice = $(this).find('input:radio').val();
+	var ans = $(this).parents("#quiz").find('#correctANS').val();
+
+	if(ans == choice){
+		$(this).parents("#quiz").find("span").html("CORRECT");
+	}
+	else{
+		$(this).parents("#quiz").find("#answer").html("INCORRECT");
+	}
+});
+
+
+
+/*
 $(function(){
     var loading = $('#loadbar').hide();
     $(document)
@@ -18,41 +34,18 @@ $(function(){
            $( "#answer" ).html(  $(this).checking(choice) );      
             $('#quiz').show();
             $('#loadbar').fadeOut();
-           /* something else */
+            something else 
     	}, 1500);
     });
 
- 
-    $ans = document.getElementById("correctANS").value;
+    $ans = $("#correctANS").val();
     console.log($ans);
 
     $.fn.checking = function(ck) {
         if (ck != $ans)
             return 'INCORRECT';
-        else 
+        else
             return 'CORRECT';
-    }; 
-});	
-
-
-const navSlide = () => {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
-
-
-    burger.addEventListener('click', () => {
-        nav.classList.toggle('nav-active');
-
-        navLinks.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = "";
-
-            } else {
-                link.style.animation = `navLinksFade 0.5s ease forwards ${index / 5 + 1}s`;
-            }
-        });
-    });
-}
-
-navSlide();
+    };
+    $("label.btn").on('click').find("#answer").attr('id', "answered");
+});	*/

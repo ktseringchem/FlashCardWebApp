@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/userProfile.jsp=UTF-8
 encoding//src/com/flashcardapp/service/CardServicesTest.java=UTF-8
 encoding//src/com/flashcardapp/service/UserServicesTest.java=UTF-8

@@ -1,6 +1,8 @@
 package com.flashcardapp.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,9 @@ import com.flashcardapp.service.UserServices;
 @SessionAttributes(value = { "sFlashcarduser", "sFlashCards" })
 public class FlashCardAppController {
 
+//	Helper method. Initializes the session attribute.
+//  Method name convention: setUp+session attribute name
+//  e.g. session attribute name: sEmployee , method name: setUpsEmployee()
 	@ModelAttribute("sFlashcarduser")
 	public Flashcarduser setUpFlashCarduser() {
 		Flashcarduser fcuser = new Flashcarduser();
@@ -70,11 +75,19 @@ public class FlashCardAppController {
 		Flashcarduser flashcarduser = (Flashcarduser) session.getAttribute("sFlashcarduser");
 		
 		ModelAndView mv = new ModelAndView();
-		if (flashcarduser != null && session.getAttribute("uname") != null && session.getAttribute("upasswd") != null) {
+		if (flashcarduser != null 
+				&& session.getAttribute("uname") != null 
+				&& session.getAttribute("upasswd") != null) 
+		{
+			CardServices cService = new CardServices();
+			List<FlashCards> flashcardlist = cService.getAllFlashCard();
+			mv.addObject("totalCards", flashcardlist.size());
+			
 			mv.setViewName("welcomepage");
-//			mv.addObject("id", flashcarduser.getUser_id());
 			return mv;
-		} else {
+		} 
+		else 
+		{
 			mv.setViewName("redirect:/LoginPage");
 			return mv;
 		}
@@ -171,25 +184,25 @@ public class FlashCardAppController {
 		}
 	}
 
-	@RequestMapping("/createcard")
-	public @ResponseBody ModelAndView createFlashCard(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String frontcard = request.getParameter("frontcard");
-		String backcard = request.getParameter("backcard");
-		CardServices cardServices = new CardServices();
-		boolean result = cardServices.addFlashCard(frontcard, backcard);
-
-		if (result) {
-			request.setAttribute("createCardMessage", "block");
-		} else {
-			request.setAttribute("notCreateCardMessage", "block");
-		}
-
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("welcomepage");
-		mv.addObject(request);
-		return mv;
-	}
+//	@RequestMapping("/createcard")
+//	public @ResponseBody ModelAndView createFlashCard(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		String frontcard = request.getParameter("frontcard");
+//		String backcard = request.getParameter("backcard");
+//		CardServices cardServices = new CardServices();
+//		boolean result = cardServices.addFlashCard(frontcard, backcard, 2);
+//
+//		if (result) {
+//			request.setAttribute("createCardMessage", "block");
+//		} else {
+//			request.setAttribute("notCreateCardMessage", "block");
+//		}
+//
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("welcomepage");
+//		mv.addObject(request);
+//		return mv;
+//	}
 
 	@RequestMapping("/deletecard/{id}")
 	public @ResponseBody void deleteFlashCard(@PathVariable String id)// @RequestParam(value="Remove") int flashcard_id)
@@ -199,12 +212,24 @@ public class FlashCardAppController {
 	}
 
 	@RequestMapping("/edit/{front}/{back}/{id}")
-	public @ResponseBody void editFlashCard(@PathVariable String front, @PathVariable String back,
-			@PathVariable String id) {
-		System.out.println(front + ", " + back + ", " + id);
+	public @ResponseBody void editFlashCard(
+			@PathVariable String front, 
+			@PathVariable String back,
+			@PathVariable String id) 
+	{
+		
 		CardServices cardServices = new CardServices();
-		cardServices.updateFlashCard(front, back, id);
-
+		FlashCards found_fc = (FlashCards) cardServices.getFlashCardById(Integer.parseInt(id));
+		if(found_fc != null)
+		{
+			System.out.println("flash card edited");
+			cardServices.updateFlashCard(front, back, id);
+		}
+		else
+		{
+			System.out.println("flash card added");
+			cardServices.addFlashCard(front, back, Integer.parseInt(id));
+		}
 	}
 
 	@InitBinder
