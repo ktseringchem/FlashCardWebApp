@@ -14,8 +14,17 @@
 <link rel="stylesheet" href="${stylewelcomepageCSS }">
 
 <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous" />
+<!-- fonts  -->
+<link
+	href="https://fonts.googleapis.com/css?family=Courgette&display=swap"
+	rel="stylesheet">
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <c:url value="/resources/img/bg-banner03.jpg" var="bgbanner03JPG" />
 
 <style type="text/css">
@@ -68,7 +77,7 @@
 	list-style-type: none;
 }
 
-.sidenav__list-item a{
+.sidenav__list-item a {
 	padding: 20px 20px 20px 40px;
 	color: #ddd;
 }
@@ -88,6 +97,7 @@
 	background-color: #e3e4e6;
 	color: #B404AE;
 	font-size: 35px;
+	font-family: 'Courgette', cursive;
 }
 
 .main-overview {
@@ -268,35 +278,38 @@
 		</aside>
 
 		<main class="main">
-		<div class="main-header" style="background: url(${bgbanner03JPG}) no-repeat fixed; background-size: cover; background-position: 0px -75px;">
+		<div class="main-header"
+			style="background: url(${bgbanner03JPG}) no-repeat fixed; background-size: cover; background-position: 0px -75px;">
 			<div class="main-header__heading"></div>
 			Welcome ${sFlashcarduser.cname}
 			<div class="main-header__updates"></div>
 		</div>
 
 		<div class="main-overview">
-			<div class="overviewcard">
+			<div class="overviewcard" style="background-color: #3A01DF;">
 				<div class="overviewcard__icon">Total Card</div>
 				<div class="overviewcard__info">${totalCards}</div>
 			</div>
-			<div class="overviewcard">
-				<div class="overviewcard__icon">Overview</div>
+			<div class="overviewcard" style="background-color: green;">
+				<div class="overviewcard__icon">Studied</div>
 				<div class="overviewcard__info">Card</div>
 			</div>
-			<div class="overviewcard">
-				<div class="overviewcard__icon">Overview</div>
-				<div class="overviewcard__info">Card</div>
+			<div class="overviewcard" style="background-color: red;">
+				<div class="overviewcard__icon">Need Review</div>
+				<div class="overviewcard__info">${totalCards}</div>
 			</div>
-			<div class="overviewcard">
-				<div class="overviewcard__icon">Overview</div>
+			<div class="overviewcard" style="background-color: #F4FA58;">
+				<div class="overviewcard__icon">New Cards</div>
 				<div class="overviewcard__info">Card</div>
 			</div>
 		</div>
 
 		<div class="main-cards">
-			<div class="card">Card</div>
-			<div class="card">Card</div>
-			<div class="card">Card</div>
+			<div class="card">
+				<div id="piechart"></div>
+			</div>
+			<div class="card">Here will be list of your cards base on subject</div>
+			<div class="card">here will be other people's card you might want add to your own</div>
 		</div>
 		</main>
 
@@ -307,8 +320,37 @@
 
 	</div>
 
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		// Load google charts
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		// Draw the chart and set the chart values
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+					[ 'Task', 'Hours per Day' ], [ 'Studied', 8 ],
+					[ 'Need Review', 2 ], [ 'New Cards', 2 ]]);
+
+			// Optional; add a title and set the width and height of the chart
+			var options = {
+				'title' : 'Distribution of cards',
+				'width' : 570,
+				'height' : 450
+			};
+
+			// Display the chart inside the <div> element with id="piechart"
+			var chart = new google.visualization.PieChart(document
+					.getElementById('piechart'));
+			chart.draw(data, options);
+		}
+	</script>
+	
 	<script>
 		const menuIconEl = $('.menu-icon');
 		const sidenavEl = $('.sidenav');
