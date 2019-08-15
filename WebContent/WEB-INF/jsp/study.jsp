@@ -53,7 +53,7 @@
 </head>
 
 
-<body>
+<body style="background-color: #A229EF;">
 	<!-- Navigation -->
 	<nav class="logo">
 		<h4>the nav</h4>

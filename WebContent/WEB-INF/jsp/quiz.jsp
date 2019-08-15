@@ -60,12 +60,11 @@
 		List<FlashCards> flashcardlist = cService.getAllFlashCard();
 
 		int i = 1;
-		for (FlashCards fc : flashcardlist.subList(0, 7)) {
+		for (FlashCards fc : flashcardlist.subList(0, 11)) {
 			List<String> fc_list = cService.fiveRandomCard();
 			fc_list.add(fc.getBack());
 			Collections.shuffle(fc_list);
 			int correctANS = fc_list.indexOf(fc.getBack());
-			
 	%>
 	<div class="container-fluid bg-info" id="" style="">
 		<div class="modal-dialog">
@@ -91,46 +90,36 @@
 					</div>
 
 					<div class="quiz" id="quiz" data-toggle="buttons">
-						<input type="hidden" id="correctANS" value="<%=correctANS%>" />
-						
-						<label class="element-animation1 btn btn-lg btn-primary btn-block">
-							<span class="btn-label"> <i class="glyphicon glyphicon-chevron-right"></i></span> 
-							<input type="radio" name="q_answer" value="0"> 
-							1. <%=fc_list.get(0)%>
-						</label> 
-						
-						
-						<label class="element-animation2 btn btn-lg btn-primary btn-block">
-							<span class="btn-label"> <i class="glyphicon glyphicon-chevron-right"></i></span> 
-							<input type="radio" name="q_answer" value="1"> 
-							2. <%=fc_list.get(1)%>
-						</label> 
-						
-						<label
+						<input type="hidden" id="correctANS" value="<%=correctANS%>" /> <label
+							class="element-animation1 btn btn-lg btn-primary btn-block">
+							<span class="btn-label"> <i
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="0"> 1. <%=fc_list.get(0)%>
+						</label> <label
+							class="element-animation2 btn btn-lg btn-primary btn-block">
+							<span class="btn-label"> <i
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="1"> 2. <%=fc_list.get(1)%>
+						</label> <label
 							class="element-animation3 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="2"> 3. <%=fc_list.get(2)%>
-						</label> 
-						
-						<label
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="2"> 3. <%=fc_list.get(2)%>
+						</label> <label
 							class="element-animation4 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="3"> 4. <%=fc_list.get(3)%>
-						</label> 
-						
-						<label
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="3"> 4. <%=fc_list.get(3)%>
+						</label> <label
 							class="element-animation5 btn btn-lg btn-primary btn-block">
 							<span class="btn-label"> <i
-								class="glyphicon glyphicon-chevron-right"></i>
-						</span> <input type="radio" name="q_answer" value="4"> 5.
-							<%=fc_list.get(4)%>
+								class="glyphicon glyphicon-chevron-right"></i></span> <input
+							type="radio" name="q_answer" value="4"> 5. <%=fc_list.get(4)%>
 						</label>
+						<div id="answerhouse" class="modal-footer text-muted">
+							<span id="answer"></span>
+						</div>
 					</div>
-				</div>
-				<div id="answerhouse" class="modal-footer text-muted">
-					<span id="answer"></span>
 				</div>
 			</div>
 		</div>
@@ -140,12 +129,12 @@
 		}
 	%>
 
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<script type="text/javascript"
-	src="<c:url value="/resources/script/js-quiz.js" />"></script>
+	<script type="text/javascript"
+		src="<c:url value="/resources/script/js-quiz.js" />"></script>
 </body>
 
 </html>

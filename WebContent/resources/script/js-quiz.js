@@ -7,10 +7,10 @@ $("label.btn").on('click',function () {
 	var ans = $(this).parents("#quiz").find('#correctANS').val();
 
 	if(ans == choice){
-		$(this).parents("#quiz").find("span").html("CORRECT");
+		$(this).parents("#quiz").find("span#answer").html("CORRECT");
 	}
 	else{
-		$(this).parents("#quiz").find("#answer").html("INCORRECT");
+		$(this).parents("#quiz").find("span#answer").html("INCORRECT");
 	}
 });
 
